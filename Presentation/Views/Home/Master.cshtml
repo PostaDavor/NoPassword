@@ -1,0 +1,52 @@
+﻿@model List<Presentation.ViewModels.vmUser>
+
+@{
+    ViewBag.Title = "Master";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Username")
+        </th>
+        <th>
+            @Html.Label("Is Logged In")
+        </th>
+        <th>
+            @Html.Label("Log Out")
+        </th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>
+                @Html.Label(user.Username)
+
+            </td>
+            <td>
+                @Html.Label(user.isLoggedIn.ToString())
+            </td>
+            <td style="text-align: center;">
+                <input type="button" value="Log Out" onclick="logOutUser('@user.Username')" />
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+
+
+
+<script>
+    
+    function logOutUser(username) {
+        var hubManager = $.connection.signalRManagerHub;
+        hubManager.server.logOutUser(username);
+    }
+
+</script>
