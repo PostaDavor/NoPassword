@@ -1,5 +1,7 @@
 ﻿@model List<Presentation.ViewModels.vmUser>
 
+<meta http-equiv="Refresh" content="3">
+
 @{
     ViewBag.Title = "Master";
 }
@@ -26,13 +28,15 @@
         <tr>
             <td>
                 @Html.Label(user.Username)
-
             </td>
             <td>
                 @Html.Label(user.isLoggedIn.ToString())
             </td>
             <td style="text-align: center;">
-                <input type="button" value="Log Out" onclick="logOutUser('@user.Username')" />
+                @if (user.isLoggedIn)
+                {
+                    <input type="button" value="Log Out" onclick="logOutUser('@user.Username')" />
+                }
             </td>
         </tr>
     }
